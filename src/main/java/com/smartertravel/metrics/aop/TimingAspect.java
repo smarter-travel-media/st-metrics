@@ -36,7 +36,6 @@ public class TimingAspect {
      * {@link GaugeService} and a default key generator.
      * <p>
      * The default key generator has the following properties:
-     * <p>
      * <ul>
      * <li>
      * If a key is specified as the value of the {@link Timed} annotation that key will be used.
