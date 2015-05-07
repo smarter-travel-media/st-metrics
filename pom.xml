@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.smartertravel.metrics.aop</groupId>
@@ -9,12 +10,13 @@
 
     <name>st-metrics</name>
     <description>Simple Spring aspects and annotations for recording method timing information</description>
+    <url>https://github.com/smarter-travel-media/st-metrics</url>
 
     <parent>
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
         <version>1.1.2.RELEASE</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <scm>
@@ -23,6 +25,21 @@
         <url>https://github.com/smarter-travel-media/st-metrics</url>
         <tag>HEAD</tag>
     </scm>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Nick Pillitteri</name>
+            <organization>Smarter Travel</organization>
+            <organizationUrl>http://www.smartertravelmedia.com/</organizationUrl>
+        </developer>
+    </developers>
 
     <!--
     <repositories>
