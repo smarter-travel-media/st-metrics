@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.smartertravel.metrics.aop</groupId>
+    <artifactId>st-metrics</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>st-metrics</name>
+    <description>Simple Spring aspects and annotations for recording method timing information</description>
+
+    <parent>
+        <groupId>io.spring.platform</groupId>
+        <artifactId>platform-bom</artifactId>
+        <version>1.1.2.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    <scm>
+        <connection>scm:git:git://github.com/smarter-travel-media/st-metrics.git</connection>
+        <developerConnection>scm:git:git@github.com:smarter-travel-media/st-metrics.git</developerConnection>
+        <url>https://github.com/smarter-travel-media/st-metrics</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <!--
+    <repositories>
+
+    </repositories>
+
+    <pluginRepositories>
+
+    </pluginRepositories>
+
+    <distributionManagement>
+
+    </distributionManagement>
+    -->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
