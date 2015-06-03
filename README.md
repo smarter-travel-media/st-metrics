@@ -71,7 +71,7 @@ of the metrics for your application, available at http://localhost:8080/metrics 
 
 ### More advanced usage
 
-If the default settings of st-metrics works for you, great! If you'd like to customize the names that
+If the default settings of st-metrics work for you, great! If you'd like to customize the names that
 timings are recorded under, you can do that too. We'll do that below.
 
 #### Fixed timing keys
@@ -97,7 +97,8 @@ public class UserDaoMysql implements UserDao {
 ```
 
 Whenever the `.getAllUsers()` method is executed, the timing will be recorded under the key 
-`timer.UserDao.allUserBootstrap`, instead of the default key of `timer.UserDaoMysql.getAllUsers`.
+`timer.UserDao.allUserBootstrap`, instead of the key it would otherwise be recorded under,
+`timer.UserDaoMysql.getAllUsers`.
 
 #### Dynamic timing keys
 
