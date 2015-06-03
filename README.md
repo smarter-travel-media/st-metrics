@@ -156,7 +156,7 @@ Then, just use the `@Timed` annotation as usual.
 
 ## Who should use st-metrics?
 
-Internal teams at SmarterTravel are already using st-metrics. It should also be useful for anyone running
-a Spring Boot application.
+Teams at SmarterTravel are already using st-metrics in internal projects. It should also be useful for
+anyone running a Spring Boot application.
 
 If you are *not* running a Spring Boot application, st-metrics probably isn't very useful for you.
