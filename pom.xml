@@ -10,7 +10,8 @@
 
     <name>st-metrics</name>
     <description>
-        Simple aspects and annotations for recording method timing information in your Spring Boot application
+        ST-Metrics is a collection of aspects and annotations for recording method timing information in your
+        Spring Boot application
     </description>
     <url>https://github.com/smarter-travel-media/st-metrics</url>
 
