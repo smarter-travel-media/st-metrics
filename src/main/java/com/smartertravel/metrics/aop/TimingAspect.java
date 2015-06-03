@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.boot.actuate.metrics.GaugeService;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -65,16 +66,8 @@ public class TimingAspect {
      * @throws NullPointerException If {@code gaugeService} or {@code keyGenerator} is null
      */
     public TimingAspect(GaugeService gaugeService, KeyGenerator keyGenerator) {
-        if (gaugeService == null) {
-            throw new NullPointerException("gaugeService may not be null");
-        }
-
-        if (keyGenerator == null) {
-            throw new NullPointerException("keyGenerator may not be null");
-        }
-
-        this.gaugeService = gaugeService;
-        this.keyGenerator = keyGenerator;
+        this.gaugeService = Objects.requireNonNull(gaugeService);
+        this.keyGenerator = Objects.requireNonNull(keyGenerator);
     }
 
 
