@@ -9,7 +9,9 @@
     <packaging>jar</packaging>
 
     <name>st-metrics</name>
-    <description>Simple Spring aspects and annotations for recording method timing information</description>
+    <description>
+        Simple aspects and annotations for recording method timing information in your Spring Boot application
+    </description>
     <url>https://github.com/smarter-travel-media/st-metrics</url>
 
     <parent>
