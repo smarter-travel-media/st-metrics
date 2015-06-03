@@ -123,9 +123,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
+                    <!--
+                    Don't try to upload the generated site anywhere here. We'll do that with
+                    the github pages plugin in the 'site-deploy' phase.
+                    -->
                     <skipDeploy>true</skipDeploy>
                 </configuration>
             </plugin>
+            <!--
+            Use github pages to host the generated maven site content. The generated content is
+            committed to the special 'gh-pages' branch which is then accessible via
+            http://eng.smartertravel.com/st-metrics
+            -->
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
