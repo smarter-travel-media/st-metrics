@@ -33,6 +33,11 @@
         <tag>HEAD</tag>
     </scm>
 
+    <issueManagement>
+        <url>https://github.com/smarter-travel-media/st-metrics/issues</url>
+        <system>GitHub</system>
+    </issueManagement>
+
     <licenses>
         <license>
             <name>MIT License</name>
