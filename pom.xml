@@ -71,6 +71,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <doxia.version>1.6</doxia.version>
         <github.global.server>github</github.global.server>
         <github-site-maven-plugin.version>0.12</github-site-maven-plugin.version>
     </properties>
@@ -123,6 +124,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
                     <!--
                     Don't try to upload the generated site anywhere here. We'll do that with
