@@ -62,4 +62,4 @@ public class UserDaoMysql implements UserDao {
 Now, on every call of `UserDaoMysql.getUserById()` you should see timing results available as part
 of the metrics for your application, available at http://localhost:8080/metrics by default.
 
-For more advanced usage, check out the [docs](http://eng.smartertravel.com/st-metrics/usage.html).
+For more advanced usage, check out the [docs](http://eng.smartertravel.com/st-metrics/).
