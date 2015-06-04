@@ -1,4 +1,4 @@
-# ST-Metrics
+## ST-Metrics
 
 ST-Metrics is a collection of aspects and annotations for recording method timing information in your
 Spring Boot application.
