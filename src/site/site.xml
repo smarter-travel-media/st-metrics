@@ -27,6 +27,7 @@
         <menu name="ST-Metrics library">
             <item name="About" href="index.html"/>
             <item name="Usage" href="usage.html"/>
+            <item name="API" href="apidocs/index.html"/>
             <item name="Development" href="development.html"/>
         </menu>
 
