@@ -104,6 +104,7 @@
     </build>
 
     <profiles>
+        <!-- NOTE: This profile requires GPG and a published key -->
         <profile>
             <id>release</id>
             <build>
@@ -146,6 +147,7 @@
                 </plugins>
             </build>
         </profile>
+        <!-- NOTE: This profile requires a GitHub OAUTH token -->
         <profile>
             <id>publish</id>
             <build>
