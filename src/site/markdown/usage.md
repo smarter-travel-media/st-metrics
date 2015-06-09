@@ -3,6 +3,9 @@
 The sections below will walk you through how to use the ST-Metrics library in your Spring Boot
 application.
 
+Note that using ST-Metrics only really makes sense in the context of a Spring Boot application.
+Otherwise, the dependency on Spring packages is pretty onerous.
+
 ### Dependency
 
 First, you'll need to include it in your project.
@@ -14,6 +17,11 @@ First, you'll need to include it in your project.
     <version>x.y.z</version>
 </dependency>
 ```
+
+The ST-Metrics library in turn, depends on The AspectJ package (`aspectjweaver`), which should be
+pulled into your application by the `spring-boot-starter-aop` package, and on the Spring Boot Actuator
+package (`spring-boot-actuator`), which should be pulled into your application by the
+`spring-boot-starter-actuator` package.
 
 For other dependency management systems, see [Dependency Information](dependency-info.html).
 
