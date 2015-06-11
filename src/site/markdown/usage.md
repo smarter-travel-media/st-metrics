@@ -3,9 +3,6 @@
 The sections below will walk you through how to use the ST-Metrics library in your Spring Boot
 application.
 
-Note that using ST-Metrics only really makes sense in the context of a Spring Boot application.
-Otherwise, the dependency on Spring packages is pretty onerous.
-
 ### Dependency
 
 First, you'll need to include it in your project.
@@ -18,22 +15,24 @@ First, you'll need to include it in your project.
 </dependency>
 ```
 
-The ST-Metrics library in turn, depends on The AspectJ package (`aspectjweaver`), which should be
-pulled into your application by the `spring-boot-starter-aop` package, and on the Spring Boot Actuator
-package (`spring-boot-actuator`), which should be pulled into your application by the
-`spring-boot-starter-actuator` package.
+The ST-Metrics library in turn, depends on The AspectJ package (`org.aspectj:aspectjweaver`), which
+should be pulled into your Spring Boot application by the `org.springframework.boot:spring-boot-starter-aop`
+package, and on the DropWizard Metrics library. You can pull this in with the
+`io.dropwizard.metrics:metrics-core` package.
 
 For other dependency management systems, see [Dependency Information](dependency-info.html).
 
 ### Basic usage
 
-Configuring ST-Metrics should be as simple as adding a new `@Bean` to your existing application `@Configuration`.
+Configuring ST-Metrics should be as simple as adding a new `@Bean` to your existing application
+`@Configuration`. After including the DropWizard Metrics library in your project, Spring Boot
+should automatically create a default `MetricRegistry` instance.
 
 ``` java
 package com.example.myapp;
 
+import com.codahale.metrics.MetricRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,11 +44,11 @@ public class MyApplicationConfig {
     // Your other configuration would be here.
     
     @Autowired
-    private GaugeService gaugeService;
+    private MetricRegistry metricRegistry;
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(gaugeService);
+        return new TimingAspect(metricRegistry);
     }
 }
 ```
@@ -137,8 +136,8 @@ Then, you just need to tell the `TimingAspect` to use your `KeyGenerator` in you
 ``` java
 package com.example.myapp;
 
+import com.codahale.metrics.MetricRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -150,11 +149,11 @@ public class MyApplicationConfig {
     // Your other configuration would be here...
     
     @Autowired
-    private GaugeService gaugeService;
+    private MetricRegistry metricRegistry;
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(gaugeService, new MyAppKeyGenerator());
+        return new TimingAspect(metricRegistry, new MyAppKeyGenerator());
     }
 }
 ```

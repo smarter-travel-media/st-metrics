@@ -1,17 +1,18 @@
 package com.smartertravel.metrics.aop;
 
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.boot.actuate.metrics.GaugeService;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Aspect that records (successful or error) method execution time in milliseconds
- * using a {@link GaugeService} and optional {@link KeyGenerator}.
+ * using a {@link Timer} and optional {@link KeyGenerator}.
  * <p>
  * This aspect uses the {@link TimingPointcut} pointcut which will track method execution
  * for all methods annotated with the {@link Timed} annotation.
@@ -29,12 +30,12 @@ import java.util.concurrent.TimeUnit;
 @Aspect
 public class TimingAspect {
 
-    private final GaugeService gaugeService;
+    private final MetricRegistry metricRegistry;
     private final KeyGenerator keyGenerator;
 
     /**
      * Construct a new timing aspect that will record method execution time using the given
-     * {@link GaugeService} and a default key generator.
+     * {@link MetricRegistry} and a default key generator.
      * <p>
      * The default key generator has the following properties:
      * <ul>
@@ -48,39 +49,40 @@ public class TimingAspect {
      * </li>
      * </ul>
      *
-     * @param gaugeService Service for recording timings as "gauges"
+     * @param metricRegistry Service for constructing new {@code Timer} instances
      * @throws NullPointerException If {@code gaugeService} is null
      */
-    public TimingAspect(GaugeService gaugeService) {
-        this(gaugeService, new DefaultKeyGenerator());
+    public TimingAspect(MetricRegistry metricRegistry) {
+        this(metricRegistry, new DefaultKeyGenerator());
     }
 
     /**
      * Construct a new timing aspect that will record method execution time using the given
-     * {@link GaugeService} and {@link KeyGenerator}.
+     * {@link MetricRegistry} and {@link KeyGenerator}.
      *
-     * @param gaugeService Service for recording timings as "gauges"
-     * @param keyGenerator {@code KeyGenerator} implementation that will create keys for metrics
-     *                     recorded with the given gaugeService based on the join point, object
-     *                     being instrumented, and {@code Timed} annotation.
-     * @throws NullPointerException If {@code gaugeService} or {@code keyGenerator} is null
+     * @param metricRegistry Service for constructing new {@code Timer} instances
+     * @param keyGenerator   {@code KeyGenerator} implementation that will create keys for metrics
+     *                       recorded with a {@code Timer} instance based on the join point, object
+     *                       being instrumented, and {@code Timed} annotation.
+     * @throws NullPointerException If {@code metricRegistry} or {@code keyGenerator} is null
      */
-    public TimingAspect(GaugeService gaugeService, KeyGenerator keyGenerator) {
-        this.gaugeService = Objects.requireNonNull(gaugeService);
+    public TimingAspect(MetricRegistry metricRegistry, KeyGenerator keyGenerator) {
+        this.metricRegistry = Objects.requireNonNull(metricRegistry);
         this.keyGenerator = Objects.requireNonNull(keyGenerator);
     }
 
 
     @Around(value = "target(bean) && TimingPointcut.performanceLog(timed)", argNames = "joinPoint,bean,timed")
     public Object performanceLog(ProceedingJoinPoint joinPoint, Object bean, Timed timed) throws Throwable {
+        final String key = "timer." + keyGenerator.getKey(joinPoint, bean, timed);
+        final Timer timer = metricRegistry.timer(key);
         final long start = System.nanoTime();
 
         try {
             return joinPoint.proceed();
         } finally {
             final long end = System.nanoTime();
-            final String key = "timer." + keyGenerator.getKey(joinPoint, bean, timed);
-            gaugeService.submit(key, TimeUnit.NANOSECONDS.toMillis(end - start));
+            timer.update(end - start, TimeUnit.NANOSECONDS);
         }
     }
 

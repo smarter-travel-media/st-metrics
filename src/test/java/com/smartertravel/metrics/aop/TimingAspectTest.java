@@ -1,5 +1,7 @@
 package com.smartertravel.metrics.aop;
 
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 import com.smartertravel.metrics.aop.TimingAspect.DefaultKeyGenerator;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -7,12 +9,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.boot.actuate.metrics.GaugeService;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -54,7 +56,10 @@ public class TimingAspectTest {
     private UserDao userDao;
 
     @Mock
-    private GaugeService gaugeService;
+    private MetricRegistry metricRegistry;
+
+    @Mock
+    private Timer timer;
 
     @Test
     public void testDefaultKeyGeneratorGetKeyAnnotationValue() throws NoSuchMethodException {
@@ -88,12 +93,13 @@ public class TimingAspectTest {
         when(joinPoint.proceed()).thenReturn(true);
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getName()).thenReturn("userExists");
+        when(metricRegistry.timer(eq("timer.UserDaoHystrix.userExists"))).thenReturn(timer);
 
-        final TimingAspect aspect = new TimingAspect(gaugeService);
+        final TimingAspect aspect = new TimingAspect(metricRegistry);
         final Object result = aspect.performanceLog(joinPoint, dao, annotations[0]);
 
         assertNotNull("Expected non-null result type", result);
         assertTrue("Expected boolean return type from aspect, was " + result.getClass().getName(), result instanceof Boolean);
-        verify(gaugeService).submit(eq("timer.UserDaoHystrix.userExists"), anyDouble());
+        verify(timer).update(anyLong(), eq(TimeUnit.NANOSECONDS));
     }
 }

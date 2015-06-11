@@ -18,8 +18,8 @@ Configuring st-metrics should be as simple as adding a new `@Bean` to your exist
 ``` java
 package com.example.myapp;
 
+import com.codahale.metrics.MetricRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.metrics.GaugeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,11 +31,11 @@ public class MyApplicationConfig {
     // Your other configuration would be here.
     
     @Autowired
-    private GaugeService gaugeService;
+    private MetricRegistry metricRegistry;
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(gaugeService);
+        return new TimingAspect(metricRegistry);
     }
 }
 ```
