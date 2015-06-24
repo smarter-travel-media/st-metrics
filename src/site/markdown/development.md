@@ -9,8 +9,8 @@ The following things are required for development of the ST-Metrics library.
 
 * Java 8
 * Maven 3
-* A GitHub account (for committing code and reporting bugs)
-* A Bintray account (for publishing new releases)
+* A [GitHub](https://github.com/) account (for committing code and reporting bugs)
+* A [Bintray](https://bintray.com/) account (for publishing new releases)
 
 ### Publish Docs
 
