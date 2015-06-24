@@ -45,3 +45,7 @@ For more information, check out the [site plugin](https://github.com/github/mave
 ### Push Release Builds
 
 TODO: Do this, then document it
+
+```
+mvn -P release release:clean release:prepare release:perform -Darguments=-DaltDeploymentRepository=bintray::default::https://api.bintray.com/maven/smartertravel/jars/st-metrics
+```
