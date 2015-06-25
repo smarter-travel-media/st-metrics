@@ -33,8 +33,9 @@ to your `~/.m2/settings.xml` file.
       <id>github</id>
       <password>YOUR_GITHUB_OAUTH_TOKEN_HERE</password>
     </server>
+  </servers>
     
-    <!-- The rest of your settings here... -->
+  <!-- The rest of your settings here... -->
 </settings>
 ```
 
@@ -64,8 +65,9 @@ organization. Once you've done that, add your username and API key to your `~/.m
       <username>YOUR_BINTRAY_USERNAME_HERE</username>
       <password>YOUR_BINTRAY_API_KEY_HERE</password>
     </server>
-    
-    <!-- The rest of your settings here... -->
+  </servers>
+  
+  <!-- The rest of your settings here... -->
 </settings>
 ```
 
