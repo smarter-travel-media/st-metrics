@@ -9,8 +9,12 @@ The following things are required for development of the ST-Metrics library.
 
 * Java 8
 * Maven 3
-* A [GitHub](https://github.com/) account (for committing code and reporting bugs)
-* A [Bintray](https://bintray.com/) account (for publishing new releases)
+* A [GitHub](https://github.com/) account (for pull requests, updating docs, and reporting bugs)
+* A [Bintray](https://bintray.com/) account (for publishing new release binaries)
+
+Note that publishing documentation or builds relies on having commit access to the
+`smarter-travel-media/st-metrics` repository on GitHub and being part of the `smartertravel`
+organization on Bintray.
 
 ### Publish Docs
 
@@ -27,14 +31,15 @@ to your `~/.m2/settings.xml` file.
   <servers>
     <server>
       <id>github</id>
-      <password>YOUR_OAUTH_TOKEN_HERE</password>
+      <password>YOUR_GITHUB_OAUTH_TOKEN_HERE</password>
     </server>
     
     <!-- The rest of your settings here... -->
 </settings>
 ```
 
-After that, you should be able to build and publish the Maven site like so.
+After that, you should be able to build and publish the Maven site like so (this is typically done
+from your local development environment).
 
 ```
 mvn -P publish clean site-deploy
@@ -44,7 +49,28 @@ For more information, check out the [site plugin](https://github.com/github/mave
 
 ### Push Release Builds
 
-TODO: Do this, then document it
+ST-Metrics uses [Bintray](https://bintray.com/) to host release builds (as JARs). If you'd like to
+publish a new build, you'll have to set up an account on Bintray and get yourself added to the `smartertravel`
+organization. Once you've done that, add your username and API key to your `~/.m2/settings.xml` file.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <servers>
+    <!-- Your Github server setup from earlier here... -->
+    
+    <server>
+      <id>bintray</id>
+      <username>YOUR_BINTRAY_USERNAME_HERE</username>
+      <password>YOUR_BINTRAY_API_KEY_HERE</password>
+    </server>
+    
+    <!-- The rest of your settings here... -->
+</settings>
+```
+
+After that, you should be able to create new releases and push them to Bintray (this is typically done from
+your local development environment).
 
 ```
 mvn -P release release:clean release:prepare release:perform -Darguments=-DaltDeploymentRepository=bintray::default::https://api.bintray.com/maven/smartertravel/jars/st-metrics
