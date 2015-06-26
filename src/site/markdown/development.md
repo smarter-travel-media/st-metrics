@@ -72,6 +72,9 @@ key to your `~/.m2/settings.xml` file.
 </settings>
 ```
 
+After that, you should be able to publish snapshot and release builds (this is typically done from your local 
+development environment).
+
 #### Snapshot Builds
 
 ```
