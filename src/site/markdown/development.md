@@ -48,11 +48,12 @@ mvn -P publish clean site-deploy
 
 For more information, check out the [site plugin](https://github.com/github/maven-plugins).
 
-### Push Release Builds
+### Pushing Builds
 
-ST-Metrics uses [Bintray](https://bintray.com/) to host release builds (as JARs). If you'd like to
-publish a new build, you'll have to set up an account on Bintray and get yourself added to the `smartertravel`
-organization. Once you've done that, add your username and API key to your `~/.m2/settings.xml` file.
+ST-Metrics uses [oss.jfrog.org](https://oss.jfrog.org/) and [Bintray](https://bintray.com/) to host snapshot
+and release builds (as JARs). If you'd like to publish a new build, you'll have to set up an account on Bintray
+and get yourself added to the `smartertravel` organization. Once you've done that, add your username and API
+key to your `~/.m2/settings.xml` file.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -71,9 +72,14 @@ organization. Once you've done that, add your username and API key to your `~/.m
 </settings>
 ```
 
-After that, you should be able to create new releases and push them to Bintray (this is typically done from
-your local development environment).
+#### Snapshot Builds
 
 ```
-mvn -P release release:clean release:prepare release:perform -Darguments=-DaltDeploymentRepository=bintray::default::https://api.bintray.com/maven/smartertravel/jars/st-metrics
+mvn -P release clean deploy -DaltDeploymentRepository=bintray::default::https://oss.jfrog.org/artifactory/oss-snapshot-local
+```
+
+#### Release Builds
+
+```
+mvn -P release clean release:clean release:prepare release:perform -Darguments=-DaltDeploymentRepository=bintray::default::https://api.bintray.com/maven/smartertravel/jars/st-metrics
 ```
