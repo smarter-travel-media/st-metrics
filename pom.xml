@@ -102,7 +102,6 @@
     </build>
 
     <profiles>
-        <!-- NOTE: This profile requires GPG and a published key -->
         <profile>
             <id>release</id>
             <build>
@@ -129,25 +128,9 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!--
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    -->
                 </plugins>
             </build>
         </profile>
-        <!-- NOTE: This profile requires a GitHub OAUTH token -->
         <profile>
             <id>publish</id>
             <build>
