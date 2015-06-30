@@ -3,7 +3,11 @@
 ST-Metrics is a collection of aspects and annotations for recording method timing information in your
 Spring Boot application.
 
-First, you'll need to include it in your project.
+### Downloads
+
+Release binaries can be found on [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.smartertravel.metrics.aop%22%20AND%20a%3A%22st-metrics%22)
+
+Example of including ST-Metrics in your Maven project:
 
 ``` xml
 <dependency>
@@ -12,6 +16,8 @@ First, you'll need to include it in your project.
     <version>x.y.z</version>
 </dependency>
 ```
+
+### Usage
 
 Configuring st-metrics should be as simple as adding a new `@Bean` to your existing application `@Configuration`.
 
@@ -61,4 +67,3 @@ public class UserDaoMysql implements UserDao {
 
 Now, on every call of `UserDaoMysql.getUserById()` you should see timing results available as part
 of the metrics for your application, available at http://localhost:8080/metrics by default.
-

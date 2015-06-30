@@ -77,12 +77,26 @@ development environment).
 
 #### Snapshot Builds
 
+Snapshot builds are pushed to `oss.jfrog.org` using your Bintray credentials.
+
 ```
 mvn -P release clean deploy -DaltDeploymentRepository=bintray::default::https://oss.jfrog.org/artifactory/oss-snapshot-local
 ```
 
 #### Release Builds
 
+Release builds are pushed to Bintray. After pushing a build to Bintray, if everything looks good, use the UI to
+synchronize the new version with Maven Central.
+
 ```
 mvn -P release clean release:clean release:prepare release:perform -Darguments=-DaltDeploymentRepository=bintray::default::https://api.bintray.com/maven/smartertravel/jars/st-metrics
 ```
+
+### Further Reading
+
+[Bintray JCenter](https://bintray.com/docs/usermanual/uploads/uploads_includingyourpackagesinjcenter.html)
+
+[Syncing with Maven Central](https://bintray.com/docs/usermanual/uploads/uploads_syncingartifactswithmavencentral.html)
+
+[OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html)
+
