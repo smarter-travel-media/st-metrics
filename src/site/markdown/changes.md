@@ -1,8 +1,8 @@
 ## Changelog
 
 The ST-Metrics library makes use of [Semantic versioning](http://semver.org/). Changes included in
-each release of the library are list below along with an indication if they are breaking changes or
-not.
+each release of the library are listed below along with an indication if they are breaking changes
+or not.
 
 ### [v0.1.1](https://github.com/smarter-travel-media/st-metrics/tree/master) - Future release
 * Documentation fixes and updates
