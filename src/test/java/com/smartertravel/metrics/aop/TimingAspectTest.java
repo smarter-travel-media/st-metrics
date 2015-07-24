@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -100,6 +101,30 @@ public class TimingAspectTest {
 
         assertNotNull("Expected non-null result type", result);
         assertTrue("Expected boolean return type from aspect, was " + result.getClass().getName(), result instanceof Boolean);
+        verify(timer).update(anyLong(), eq(TimeUnit.NANOSECONDS));
+    }
+
+    @Test
+    public void testPerformanceLogWithException() throws Throwable {
+        final UserDaoHystrix dao = new UserDaoHystrix();
+        final Method method = dao.getClass().getMethod("userExists", String.class);
+        final Timed[] annotations = method.getAnnotationsByType(Timed.class);
+
+        when(joinPoint.proceed()).thenThrow(IOException.class);
+        when(joinPoint.getSignature()).thenReturn(signature);
+        when(signature.getName()).thenReturn("userExists");
+        when(metricRegistry.timer(eq("timer.UserDaoHystrix.userExists"))).thenReturn(timer);
+
+        final TimingAspect aspect = new TimingAspect(metricRegistry);
+        IOException err = null;
+
+        try {
+            aspect.performanceLog(joinPoint, dao, annotations[0]);
+        } catch (IOException e) {
+            err = e;
+        }
+
+        assertNotNull("Expected exception to be raised while calling join point", err);
         verify(timer).update(anyLong(), eq(TimeUnit.NANOSECONDS));
     }
 }
