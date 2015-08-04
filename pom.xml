@@ -1,168 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.smartertravel.metrics.aop</groupId>
-    <artifactId>st-metrics</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
-    <packaging>jar</packaging>
+  <groupId>com.smartertravel.metrics.aop</groupId>
+  <artifactId>st-metrics</artifactId>
+  <version>0.1.2-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <name>st-metrics</name>
-    <description>
-        ST-Metrics is a collection of aspects and annotations for recording method timing information in your
-        Spring Boot application
-    </description>
+  <name>st-metrics</name>
+  <description>
+    ST-Metrics is a collection of aspects and annotations for recording method timing information in your
+    Spring Boot application
+  </description>
+  <url>https://github.com/smarter-travel-media/st-metrics</url>
+
+  <parent>
+    <groupId>io.spring.platform</groupId>
+    <artifactId>platform-bom</artifactId>
+    <version>1.1.2.RELEASE</version>
+    <relativePath/>
+  </parent>
+
+  <organization>
+    <name>Smarter Travel</name>
+    <url>http://www.smartertravelmedia.com</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:git://github.com/smarter-travel-media/st-metrics.git</connection>
+    <developerConnection>scm:git:git@github.com:smarter-travel-media/st-metrics.git</developerConnection>
     <url>https://github.com/smarter-travel-media/st-metrics</url>
+    <tag>HEAD</tag>
+  </scm>
 
-    <parent>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>1.1.2.RELEASE</version>
-        <relativePath />
-    </parent>
+  <issueManagement>
+    <url>https://github.com/smarter-travel-media/st-metrics/issues</url>
+    <system>GitHub</system>
+  </issueManagement>
 
-    <organization>
-        <name>Smarter Travel</name>
-        <url>http://www.smartertravelmedia.com</url>
-    </organization>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
 
-    <scm>
-        <connection>scm:git:git://github.com/smarter-travel-media/st-metrics.git</connection>
-        <developerConnection>scm:git:git@github.com:smarter-travel-media/st-metrics.git</developerConnection>
-        <url>https://github.com/smarter-travel-media/st-metrics</url>
-        <tag>HEAD</tag>
-    </scm>
+  <developers>
+    <developer>
+      <name>Nick Pillitteri</name>
+      <organization>Smarter Travel</organization>
+      <organizationUrl>http://www.smartertravelmedia.com/</organizationUrl>
+    </developer>
+  </developers>
 
-    <issueManagement>
-        <url>https://github.com/smarter-travel-media/st-metrics/issues</url>
-        <system>GitHub</system>
-    </issueManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <doxia.version>1.6</doxia.version>
+    <github.global.server>github</github.global.server>
+    <github-site-maven-plugin.version>0.12</github-site-maven-plugin.version>
+  </properties>
 
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-        </license>
-    </licenses>
+  <dependencies>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-    <developers>
-        <developer>
-            <name>Nick Pillitteri</name>
-            <organization>Smarter Travel</organization>
-            <organizationUrl>http://www.smartertravelmedia.com/</organizationUrl>
-        </developer>
-    </developers>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-module-markdown</artifactId>
+            <version>${doxia.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <doxia.version>1.6</doxia.version>
-        <github.global.server>github</github.global.server>
-        <github-site-maven-plugin.version>0.12</github-site-maven-plugin.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <build>
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
-            </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>publish</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.github</groupId>
-                        <artifactId>site-maven-plugin</artifactId>
-                        <version>${github-site-maven-plugin.version}</version>
-                        <configuration>
-                            <message>Creating site for ${project.version}</message>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>site</goal>
-                                </goals>
-                                <phase>site-deploy</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <reporting>
+      </build>
+    </profile>
+    <profile>
+      <id>publish</id>
+      <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
+          <plugin>
+            <groupId>com.github.github</groupId>
+            <artifactId>site-maven-plugin</artifactId>
+            <version>${github-site-maven-plugin.version}</version>
+            <configuration>
+              <message>Creating site for ${project.version}</message>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>site</goal>
+                </goals>
+                <phase>site-deploy</phase>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
-    </reporting>
+      </build>
+    </profile>
+  </profiles>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
 
 </project>
