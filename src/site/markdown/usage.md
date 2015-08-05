@@ -5,7 +5,7 @@ application.
 
 ### Dependency
 
-First, you'll need to include it in your project.
+First, if you're using Maven, you'll need to include it in your project.
 
 ``` xml
 <dependency>
