@@ -6,3 +6,10 @@ jdk:
 branches:
   only:
     - master
+
+env:
+  global:
+    - secure: "xgSgbEomGfEDgIDCSk8PgO0d/Z6zvHfLW1dbj2/3AhOF0ZkNYiTMiT9QqZDhXFXDVFvPbJonpqg2mxGtXf8BfGukjDpIPAaefeZ5WWBAliFRDdSiMKU7tLUBGZL0kbbY/AjOKi90Yc1h33uguOOwgG95ihFriLmNwnJex1GrijhJO+OSZMh6u4HfyGGsCE2fMC/TR5okoSToW7ttAgM+GphCO6gOPcPTaPQUcDc9OsBxY7pWgjNGboM3Bigx9zMcmnFGK/lN2ev26Ytl/FVfcvUechC9NIhBCm6EFJCmQC8U+XAvPiSEz18QDmkhyTISwMfFneAeAvNem4waq0D083sw/hNTp4C85bMgwKRlqzWyy7wCwdIZbacnYCVJqvv0db87kI84ainpyAdW8J0YCgZG11p10UInBxviwSmKrxfuHLCZi3WwdRSTQ70jbT9wIO6Wmzehb7regKatMUJ1cq7v3Z1t5kpbwhIwIWzcOeRbASa8w7jf4XZnQLaP6jp3K+/zSr7cWmKPuDIEm2vr25XBHBvL9k1OY2KKWuTABTXwc+4TM0rDwgR8x83kSKKMyIxey0DEPtCpV1cQu4i9Spv3F76ZjbKH5FGgmkLf41qXJnoj/NBREdg4yiyxC31s+kj4GmsfbSHzU0Fy1Iqt4BffWrak4sVYoRYjQHi31c4="
+
+after_success:
+  - ./push-docs.sh
