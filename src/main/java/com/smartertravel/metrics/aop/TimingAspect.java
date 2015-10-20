@@ -1,7 +1,6 @@
 package com.smartertravel.metrics.aop;
 
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
+import com.smartertravel.metrics.aop.backend.MetricSink;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,15 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Aspect that records (successful or error) method execution time in milliseconds
- * using a {@link Timer} and optional {@link KeyGenerator}.
+ * using one of several {@link MetricSink} backends and optional {@link KeyGenerator}.
  * <p>
  * This aspect uses the {@link TimingPointcut} pointcut which will track method execution
  * for all methods annotated with the {@link Timed} annotation.
  * <p>
  * Note that his aspect will prefix all metric keys created by the {@code KeyGenerator} with
- * "timer." since we make use of Dropwizard metrics library. The Spring Boot documentation
- * indicates that all we need to do to make use of Dropwizard metric types is to add the
- * appropriate prefix.
+ * "timer."
  * <p>
  * This class is thread safe.
  *
@@ -30,12 +27,12 @@ import java.util.concurrent.TimeUnit;
 @Aspect
 public class TimingAspect {
 
-    private final MetricRegistry metricRegistry;
+    private final MetricSink metricSink;
     private final KeyGenerator keyGenerator;
 
     /**
      * Construct a new timing aspect that will record method execution time using the given
-     * {@link MetricRegistry} and a default key generator.
+     * {@link MetricSink} implementation and a default key generator.
      * <p>
      * The default key generator has the following properties:
      * <ul>
@@ -49,40 +46,38 @@ public class TimingAspect {
      * </li>
      * </ul>
      *
-     * @param metricRegistry Service for constructing new {@code Timer} instances
-     * @throws NullPointerException If {@code gaugeService} is null
+     * @param metricSink Metric backend to submit timings to
+     * @throws NullPointerException If {@code metricSink} is null
      */
-    public TimingAspect(MetricRegistry metricRegistry) {
-        this(metricRegistry, new DefaultKeyGenerator());
+    public TimingAspect(MetricSink metricSink) {
+        this(metricSink, new DefaultKeyGenerator());
     }
 
     /**
      * Construct a new timing aspect that will record method execution time using the given
-     * {@link MetricRegistry} and {@link KeyGenerator}.
+     * {@link MetricSink} implementation and {@link KeyGenerator}.
      *
-     * @param metricRegistry Service for constructing new {@code Timer} instances
-     * @param keyGenerator   {@code KeyGenerator} implementation that will create keys for metrics
-     *                       recorded with a {@code Timer} instance based on the join point, object
-     *                       being instrumented, and {@code Timed} annotation.
-     * @throws NullPointerException If {@code metricRegistry} or {@code keyGenerator} is null
+     * @param metricSink   Metric backend to submit timings to
+     * @param keyGenerator {@code KeyGenerator} implementation that will create keys for metrics
+     *                     recorded with a {@code Timer} instance based on the join point, object
+     *                     being instrumented, and {@code Timed} annotation.
+     * @throws NullPointerException If {@code metricSink} or {@code keyGenerator} is null
      */
-    public TimingAspect(MetricRegistry metricRegistry, KeyGenerator keyGenerator) {
-        this.metricRegistry = Objects.requireNonNull(metricRegistry);
+    public TimingAspect(MetricSink metricSink, KeyGenerator keyGenerator) {
+        this.metricSink = Objects.requireNonNull(metricSink);
         this.keyGenerator = Objects.requireNonNull(keyGenerator);
     }
-
 
     @Around(value = "target(bean) && TimingPointcut.performanceLog(timed)", argNames = "joinPoint,bean,timed")
     public Object performanceLog(ProceedingJoinPoint joinPoint, Object bean, Timed timed) throws Throwable {
         final String key = "timer." + keyGenerator.getKey(joinPoint, bean, timed);
-        final Timer timer = metricRegistry.timer(key);
         final long start = System.nanoTime();
 
         try {
             return joinPoint.proceed();
         } finally {
             final long end = System.nanoTime();
-            timer.update(end - start, TimeUnit.NANOSECONDS);
+            metricSink.time(key, end - start, TimeUnit.NANOSECONDS);
         }
     }
 
@@ -98,7 +93,7 @@ public class TimingAspect {
      * "SomeDaoClass.doSomething" or "SomeServiceClient.getThing".
      * <p>
      * Note that the {@code TimingAspect} will add a "timer." prefix to the metric key
-     * no matter what. This is done to to make use of Dropwizard timing histograms.
+     * no matter what.
      * <p>
      * Implementations must be thread safe.
      */
