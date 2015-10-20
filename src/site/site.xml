@@ -28,6 +28,7 @@
       <item name="About" href="index.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="API" href="apidocs/index.html"/>
+      <item name="Migration" href="migration.html"/>
       <item name="Development" href="development.html"/>
       <item name="Changelog" href="changes.html"/>
     </menu>

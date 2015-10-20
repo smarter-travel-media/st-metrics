@@ -17,9 +17,35 @@ Example of including ST-Metrics in your Maven project:
 </dependency>
 ```
 
+ST-Metrics can make use to two different backends to send timing metrics to: DropWizard Metrics or Spring
+Boot Actuator. Depending on which of these you'd like to use, you may have to add another include to pull
+in the relevant package.
+
+DropWizard Metrics
+
+``` xml
+<dependency>
+    <groupId>io.dropwizard.metrics</groupId>
+    <artifactId>metrics-core</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+Spring Boot Actuator:
+
+``` xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
 ## Usage
 
 Configuring st-metrics should be as simple as adding a new `@Bean` to your existing application `@Configuration`.
+
+An example of using the DropWizard Metrics backend.
 
 ``` java
 package com.example.myapp;
@@ -30,6 +56,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkDropWizard;
 
 @Configuration
 public class MyApplicationConfig {
@@ -41,7 +68,35 @@ public class MyApplicationConfig {
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(metricRegistry);
+        return new TimingAspect(new MetricSinkDropWizard(metricRegistry));
+    }
+}
+```
+
+An example of using the Spring Boot Actuator backend.
+
+``` java
+package com.example.myapp;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.GaugeService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkSpringBoot;
+
+@Configuration
+public class MyApplicationConfig {
+
+    // Your other configuration would be here.
+    
+    @Autowired
+    private GaugeService gaugeService;
+    
+    @Bean
+    public TimingAspect timingAspect() {
+        return new TimingAspect(new MetricSinkSpringBoot(gaugeService));
     }
 }
 ```
@@ -67,5 +122,6 @@ public class UserDaoMysql implements UserDao {
 
 Now, on every call of `UserDaoMysql.getUserById()` you should see timing results available as part
 of the metrics for your application, available at http://localhost:8080/metrics by default.
+
 
 For more advanced usage, check out the [docs](http://eng.smartertravel.com/st-metrics/).

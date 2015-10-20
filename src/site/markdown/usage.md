@@ -25,8 +25,23 @@ For other dependency management systems, see [Dependency Information](dependency
 ### Basic usage
 
 Configuring ST-Metrics should be as simple as adding a new `@Bean` to your existing application
-`@Configuration`. After including the DropWizard Metrics library in your project, Spring Boot
-should automatically create a default `MetricRegistry` instance.
+`@Configuration`. As previously mentioned, ST-Metrics can use either DropWizard Metrics or Spring
+Boot Actuator as a backend. Depending on which library you've chosen to include, configuration
+of ST-Metrics will be a little different.
+
+#### Configuring DropWizard Metrics Backend
+
+First, you'll want the DropWizard Metrics library included in your project.
+
+``` xml
+<dependency>
+    <groupId>io.dropwizard.metrics</groupId>
+    <artifactId>metrics-core</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+Next, create a ``TimingAspect`` instance that will use a DropWizard Metrics backend.
 
 ``` java
 package com.example.myapp;
@@ -37,6 +52,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkDropWizard;
 
 @Configuration
 public class MyApplicationConfig {
@@ -48,12 +64,58 @@ public class MyApplicationConfig {
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(metricRegistry);
+        return new TimingAspect(new MetricSinkDropWizard(metricRegistry));
     }
 }
 ```
+
+#### Configuring Spring Boot Actuator Backend
+
+If you're using Spring Boot for your project, you'll probably just want to include the [Spring Boot
+Starter Actuator](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready) library.
+
+``` xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+Next, create a ``TimingAspect`` instance that will use a Spring Boot Actuator backend.
+
+``` java
+package com.example.myapp;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.GaugeService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkSpringBoot;
+
+@Configuration
+public class MyApplicationConfig {
+
+    // Your other configuration would be here.
     
-Then, all you have to do is annotate any method you want to record the timing of.
+    @Autowired
+    private GaugeService gaugeService;
+    
+    @Bean
+    public TimingAspect timingAspect() {
+        return new TimingAspect(new MetricSinkSpringBoot(gaugeService));
+    }
+}
+```
+
+#### Usage In Your Application Code
+
+After you've configured the aspect appropriately for your desired metrics backend, all you have to do is
+annotate any public method you want to record the timing of.
+
+**NOTE** - ST-Metrics is only able to record timing information for ``public`` methods.
     
 ``` java
 package com.example.myapp;
@@ -142,6 +204,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkDropWizard;
 
 @Configuration
 public class MyApplicationConfig {
@@ -153,7 +216,7 @@ public class MyApplicationConfig {
     
     @Bean
     public TimingAspect timingAspect() {
-        return new TimingAspect(metricRegistry, new MyAppKeyGenerator());
+        return new TimingAspect(new MetricSinkDropWizard(metricRegistry), new MyAppKeyGenerator());
     }
 }
 ```
