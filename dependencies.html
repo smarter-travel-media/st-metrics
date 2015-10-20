@@ -842,83 +842,300 @@
 <th>Repo ID</th>
 <th>URL</th>
 <th>Release</th>
-<th>Snapshot</th></tr>
+<th>Snapshot</th>
+<th>Blacklisted</th></tr>
 <tr class="b">
+<td>sonatype-snapshots</td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots/">https://oss.sonatype.org/content/repositories/snapshots/</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr class="a">
 <td>central</td>
 <td><a class="externalLink" href="https://repo.maven.apache.org/maven2">https://repo.maven.apache.org/maven2</a></td>
 <td>Yes</td>
-<td>No</td></tr></table>
+<td>No</td>
+<td>No</td></tr>
+<tr class="b">
+<td>sonatype</td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases/">https://oss.sonatype.org/content/repositories/releases/</a></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td></tr>
+<tr class="a">
+<td>codehaus-snapshots</td>
+<td><a class="externalLink" href="https://nexus.codehaus.org/snapshots/">https://nexus.codehaus.org/snapshots/</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td></tr>
+<tr class="b">
+<td>apache-snapshots</td>
+<td><a class="externalLink" href="https://repository.apache.org/snapshots/">https://repository.apache.org/snapshots/</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr class="a">
+<td>spring-milestones</td>
+<td><a class="externalLink" href="http://repo.spring.io/milestone">http://repo.spring.io/milestone</a></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td></tr>
+<tr class="b">
+<td>spring-snapshots</td>
+<td><a class="externalLink" href="http://repo.spring.io/snapshot">http://repo.spring.io/snapshot</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr class="a">
+<td>spring-ext</td>
+<td><a class="externalLink" href="http://repo.spring.io/ext-release-local/">http://repo.spring.io/ext-release-local/</a></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td></tr>
+<tr class="b">
+<td>sonatype-nexus-snapshots</td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots">https://oss.sonatype.org/content/repositories/snapshots</a></td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td></tr>
+<tr class="a">
+<td>sonatype-apache</td>
+<td><a class="externalLink" href="https://repository.apache.org/releases/">https://repository.apache.org/releases/</a></td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td></tr></table>
 <p>Repository locations for each of the Dependencies.</p>
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Artifact</th>
-<th>central</th></tr>
+<th>sonatype-snapshots</th>
+<th>central</th>
+<th>sonatype</th>
+<th>apache-snapshots</th>
+<th>spring-milestones</th>
+<th>spring-snapshots</th>
+<th>spring-ext</th>
+<th>sonatype-nexus-snapshots</th></tr>
 <tr class="b">
 <td>aopalliance:aopalliance:jar:1.0</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>com.fasterxml.jackson.core:jackson-annotations:jar:2.4.5</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>com.fasterxml.jackson.core:jackson-core:jar:2.4.5</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>com.fasterxml.jackson.core:jackson-databind:jar:2.4.5</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>junit:junit:jar:4.11</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/junit/junit/4.11/junit-4.11.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/junit/junit/4.11/junit-4.11.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//junit/junit/4.11/junit-4.11.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.aspectj:aspectjweaver:jar:1.8.5</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/aspectj/aspectjweaver/1.8.5/aspectjweaver-1.8.5.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.hamcrest:hamcrest-core:jar:1.3</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.mockito:mockito-core:jar:1.10.8</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/mockito/mockito-core/1.10.8/mockito-core-1.10.8.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/mockito/mockito-core/1.10.8/mockito-core-1.10.8.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/mockito/mockito-core/1.10.8/mockito-core-1.10.8.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.objenesis:objenesis:jar:2.1</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.1/objenesis-2.1.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.1/objenesis-2.1.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/objenesis/objenesis/2.1/objenesis-2.1.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.slf4j:slf4j-api:jar:1.7.11</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.11/slf4j-api-1.7.11.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.11/slf4j-api-1.7.11.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/slf4j/slf4j-api/1.7.11/slf4j-api-1.7.11.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.springframework:spring-aop:jar:4.1.6.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/spring-aop/4.1.6.RELEASE/spring-aop-4.1.6.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.springframework:spring-beans:jar:4.1.6.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-beans/4.1.6.RELEASE/spring-beans-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-beans/4.1.6.RELEASE/spring-beans-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/spring-beans/4.1.6.RELEASE/spring-beans-4.1.6.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.springframework:spring-context:jar:4.1.6.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-context/4.1.6.RELEASE/spring-context-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-context/4.1.6.RELEASE/spring-context-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/spring-context/4.1.6.RELEASE/spring-context-4.1.6.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.springframework:spring-core:jar:4.1.6.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/spring-core/4.1.6.RELEASE/spring-core-4.1.6.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.springframework:spring-expression:jar:4.1.6.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/spring-expression/4.1.6.RELEASE/spring-expression-4.1.6.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.springframework.boot:spring-boot:jar:1.2.3.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot/1.2.3.RELEASE/spring-boot-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot/1.2.3.RELEASE/spring-boot-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/boot/spring-boot/1.2.3.RELEASE/spring-boot-1.2.3.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>org.springframework.boot:spring-boot-autoconfigure:jar:1.2.3.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-autoconfigure/1.2.3.RELEASE/spring-boot-autoconfigure-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-autoconfigure/1.2.3.RELEASE/spring-boot-autoconfigure-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/boot/spring-boot-autoconfigure/1.2.3.RELEASE/spring-boot-autoconfigure-1.2.3.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.yaml:snakeyaml:jar:1.14</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.14/snakeyaml-1.14.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.14/snakeyaml-1.14.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/yaml/snakeyaml/1.14/snakeyaml-1.14.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <td>io.dropwizard.metrics:metrics-core:jar:3.1.1</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/3.1.1/metrics-core-3.1.1.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/3.1.1/metrics-core-3.1.1.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//io/dropwizard/metrics/metrics-core/3.1.1/metrics-core-3.1.1.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="a">
 <td>org.springframework.boot:spring-boot-actuator:jar:1.2.3.RELEASE</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-actuator/1.2.3.RELEASE/spring-boot-actuator-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
+<td>-</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-actuator/1.2.3.RELEASE/spring-boot-actuator-1.2.3.RELEASE.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/releases//org/springframework/boot/spring-boot-actuator/1.2.3.RELEASE/spring-boot-actuator-1.2.3.RELEASE.jar"><img alt="Found at https://oss.sonatype.org/content/repositories/releases/" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td></tr>
 <tr class="b">
 <th>Total</th>
-<th>central</th></tr>
+<th>sonatype-snapshots</th>
+<th>central</th>
+<th>sonatype</th>
+<th>apache-snapshots</th>
+<th>spring-milestones</th>
+<th>spring-snapshots</th>
+<th>spring-ext</th>
+<th>sonatype-nexus-snapshots</th></tr>
 <tr class="a">
 <td>20 (compile: 16, test: 4)</td>
-<td>20</td></tr></table></div>
+<td>0</td>
+<td>20</td>
+<td>19</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td></tr></table></div>
                   </div>
             </div>
           </div>
