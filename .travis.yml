@@ -12,6 +12,4 @@ env:
     - secure: "DcPcAzn3y+pAOUa3xyRoMAj8U1DGnqFUKYq3yNbEGAa+VVX2iL5BSxxCUrrHsBF5h3oOzAEwcY0NWQMc3uV1uQSGJpt+oztuYSvOD/Z1g5/dJTVoApLozKaf4KtG/wGnUCcwbH1MnJ0AeFCAVIGjjAIPP5nPjbBot+m8c6Sxhsu3+o4qD/rCDjljLQRnoQ+Px2vFoc2aHnluOrMi+ABLT85EG+MiMq9KJdKQJGUMLV+b73DyDNofIFHNRagDCOD8WDElnJISf+yw8B8rgHRjYC7S/sq/Dqrm/fpldqh+rR0wV3Q3US/G9zIushbWdJ/AI8rVaAzsmdMmjyViLfxXGnnTxZADoJPf5833+hPHnx2x8sReVBdvmBFcJ6szqgduKSUdVoj9CjhKIB32gDBRdaoM1sHkC7rKqf7+kUdkJTMtz0IJqDM6iYbSMhxc1NCYE1MHukOaURKhU8av6jN93z//GkVB4G0kpE9N7E+u9jq2ni0Whl/pDaUzvIFsWUPgMzaNyCfSDtPzQJkUtmXg++g9VnTXt3sw6A3f5wW9U9Gf0DRKeNgvLFx9aElcCvP2PbD+ed6rm4bCl1GhCchw9M6gKQWy/qWNEooVS2ZaRUW06a1DoYWKCy+7zlofUd8pykbUyMyZXwv24NoZCWboYXUMEU/g3WG7VPDR1hu+Uo8="
 
 after_success:
-  if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-    ./push-docs.sh
-  fi
+  - ./push-docs.sh
