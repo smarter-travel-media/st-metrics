@@ -1,4 +1,4 @@
-# ST-Metrics [![Build Status](https://travis-ci.org/smarter-travel-media/st-metrics.svg?branch=master)](https://travis-ci.org/smarter-travel-media/st-metrics)
+# ST-Metrics [![Build Status](https://travis-ci.org/smarter-travel-media/st-metrics.svg?branch=master)](https://travis-ci.org/smarter-travel-media/st-metrics) [![Download](https://api.bintray.com/packages/smartertravel/jars/st-metrics/images/download.svg) ](https://bintray.com/smartertravel/jars/st-metrics/_latestVersion)
 
 ST-Metrics is a collection of aspects and annotations for recording method timing information in your
 Spring Boot application.
