@@ -102,6 +102,8 @@ public class MyApplicationConfig {
 ```
     
 Then, all you have to do is annotate any method you want to record the timing of.
+
+**NOTE** - Only `public` methods can be annotated and timed.
     
 ``` java
 package com.example.myapp;

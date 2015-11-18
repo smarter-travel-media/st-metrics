@@ -115,7 +115,7 @@ public class MyApplicationConfig {
 After you've configured the aspect appropriately for your desired metrics backend, all you have to do is
 annotate any public method you want to record the timing of.
 
-**NOTE** - ST-Metrics is only able to record timing information for ``public`` methods.
+**NOTE** - Only `public` methods can be annotated and timed.
     
 ``` java
 package com.example.myapp;
