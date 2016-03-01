@@ -1,4 +1,7 @@
-# ST-Metrics [![Build Status](https://travis-ci.org/smarter-travel-media/st-metrics.svg?branch=master)](https://travis-ci.org/smarter-travel-media/st-metrics)
+# ST-Metrics
+
+[![Build Status](https://travis-ci.org/smarter-travel-media/st-metrics.svg?branch=master)](https://travis-ci.org/smarter-travel-media/st-metrics)
+[![Maven Central](https://img.shields.io/maven-central/v/com.smartertravel.metrics.aop/st-metrics.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.smartertravel.metrics.aop%22%20AND%20a%3A%22st-metrics%22)
 
 ST-Metrics is a collection of aspects and annotations for recording method timing information in your
 Spring Boot application.
