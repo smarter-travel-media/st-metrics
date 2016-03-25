@@ -4,7 +4,7 @@
 
   <groupId>com.smartertravel.metrics.aop</groupId>
   <artifactId>st-metrics</artifactId>
-  <version>0.2.1-SNAPSHOT</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
 
   <name>st-metrics</name>
@@ -30,7 +30,7 @@
     <connection>scm:git:git://github.com/smarter-travel-media/st-metrics.git</connection>
     <developerConnection>scm:git:git@github.com:smarter-travel-media/st-metrics.git</developerConnection>
     <url>https://github.com/smarter-travel-media/st-metrics</url>
-    <tag>HEAD</tag>
+    <tag>st-metrics-0.3.0</tag>
   </scm>
 
   <issueManagement>
