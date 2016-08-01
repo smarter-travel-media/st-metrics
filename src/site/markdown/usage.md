@@ -188,7 +188,7 @@ public class MyAppKeyGenerator implements KeyGenerator {
 
     @Override
     public String getKey(JoinPoint jp, Object bean, Timed timed) {
-        return "myAwesomeApp." + bean.getClass().getSimpleName() + "." + jp.getSignature().getName();
+        return "timer.myAwesomeApp." + bean.getClass().getSimpleName() + "." + jp.getSignature().getName();
     }
 }
 ```

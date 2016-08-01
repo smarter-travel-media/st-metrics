@@ -75,7 +75,7 @@ public class TimingAspectTest {
         final Timed[] annotations = method.getAnnotationsByType(Timed.class);
 
         final DefaultKeyGenerator keyGenerator = new DefaultKeyGenerator();
-        assertEquals("mysqlDao.userExists", keyGenerator.getKey(joinPoint, dao, annotations[0]));
+        assertEquals("timer.mysqlDao.userExists", keyGenerator.getKey(joinPoint, dao, annotations[0]));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class TimingAspectTest {
         when(signature.getName()).thenReturn("userExists");
 
         final DefaultKeyGenerator keyGenerator = new DefaultKeyGenerator();
-        assertEquals("UserDaoHystrix.userExists", keyGenerator.getKey(joinPoint, dao, annotations[0]));
+        assertEquals("timer.UserDaoHystrix.userExists", keyGenerator.getKey(joinPoint, dao, annotations[0]));
     }
 
     @Test

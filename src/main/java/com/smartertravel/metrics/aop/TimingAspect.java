@@ -16,9 +16,6 @@ import java.util.concurrent.TimeUnit;
  * This aspect uses the {@link TimingPointcut} pointcut which will track method execution
  * for all methods annotated with the {@link Timed} annotation.
  * <p>
- * Note that his aspect will prefix all metric keys created by the {@code KeyGenerator} with
- * "timer."
- * <p>
  * This class is thread safe.
  *
  * @see <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics">Spring Boot Metrics Docs</a>
@@ -37,10 +34,11 @@ public class TimingAspect {
      * The default key generator has the following properties:
      * <ul>
      * <li>
-     * If a key is specified as the value of the {@link Timed} annotation that key will be used.
+     * If a key is specified as the value of the {@link Timed} annotation that key will be used, prefixed
+     * with the string "timer.".
      * </li>
      * <li>
-     * Otherwise, the key will be of the form "$CLASS.$METHOD" where "$CLASS" is the short class
+     * Otherwise, the key will be of the form "timer.$CLASS.$METHOD" where "$CLASS" is the short class
      * name of the bean that the {@code Timed} method is part of, and "$METHOD" is the name of the
      * {@code Timed} method.
      * </li>
@@ -70,7 +68,7 @@ public class TimingAspect {
 
     @Around(value = "target(bean) && TimingPointcut.performanceLog(timed)", argNames = "joinPoint,bean,timed")
     public Object performanceLog(ProceedingJoinPoint joinPoint, Object bean, Timed timed) throws Throwable {
-        final String key = "timer." + keyGenerator.getKey(joinPoint, bean, timed);
+        final String key = keyGenerator.getKey(joinPoint, bean, timed);
         final long start = System.nanoTime();
 
         try {
@@ -90,10 +88,12 @@ public class TimingAspect {
      * of this parameters (but obviously you should be using <em>some</em> of them).
      * <p>
      * Metrics keys are expected to be several period '.' separated values. For example
-     * "SomeDaoClass.doSomething" or "SomeServiceClient.getThing".
+     * "timer.SomeDaoClass.doSomething" or "timer.SomeServiceClient.getThing".
      * <p>
-     * Note that the {@code TimingAspect} will add a "timer." prefix to the metric key
-     * no matter what.
+     * Prefixing metrics with the string "timer." may cause the metric to be treated in
+     * a special manner by a particular backend. For example, DropWizard treats metrics
+     * with keys that start with "timer." as, well, timers instead of counters or
+     * gauges. However, it is not required for implementations to do this.
      * <p>
      * Implementations must be thread safe.
      */
@@ -113,7 +113,8 @@ public class TimingAspect {
     /**
      * Default implementation of a {@code KeyGenerator} that generates a key based
      * on the bean class name and annotated method name or, optionally, the key
-     * specified as part of the {@code Timed} annotation.
+     * specified as part of the {@code Timed} annotation. In either case, the string
+     * "timer." will be prefixed to the key.
      */
     // VisibleForTesting
     static class DefaultKeyGenerator implements KeyGenerator {
@@ -121,10 +122,10 @@ public class TimingAspect {
         public String getKey(JoinPoint jp, Object bean, Timed timed) {
             final String annotationValue = timed.value();
             if (annotationValue.length() != 0) {
-                return annotationValue;
+                return "timer." + annotationValue;
             }
 
-            return bean.getClass().getSimpleName() + "." + jp.getSignature().getName();
+            return "timer." + bean.getClass().getSimpleName() + "." + jp.getSignature().getName();
         }
     }
 
