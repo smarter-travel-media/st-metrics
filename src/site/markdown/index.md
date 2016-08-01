@@ -17,9 +17,9 @@ Example of including ST-Metrics in your Maven project:
 </dependency>
 ```
 
-ST-Metrics can make use to two different backends to send timing metrics to: DropWizard Metrics or Spring
-Boot Actuator. Depending on which of these you'd like to use, you may have to add another include to pull
-in the relevant package.
+ST-Metrics can make use to several different backends to send timing metrics to: DropWizard Metrics, Spring
+Boot Actuator, or a Statsd client. Depending on which of these you'd like to use, you may have to add another
+include to pull in the relevant package.
 
 DropWizard Metrics
 
@@ -31,12 +31,22 @@ DropWizard Metrics
 </dependency>
 ```
 
-Spring Boot Actuator:
+... or Spring Boot Actuator:
 
 ``` xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-actuator</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+... or Statsd Client:
+
+``` xml
+<dependency>
+    <groupId>com.timgroup</groupId>
+    <artifactId>java-statsd-client</artifactId>
     <version>x.y.z</version>
 </dependency>
 ```
@@ -100,7 +110,35 @@ public class MyApplicationConfig {
     }
 }
 ```
+
+An example of using the Statsd Client backend.
+
+``` java
+package com.example.myapp;
+
+import com.timgroup.statsd.StatsDClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.smartertravel.metrics.aop.TimingAspect;
+import com.smartertravel.metrics.aop.backend.MetricSinkStatsdClient;
+
+@Configuration
+public class MyApplicationConfig {
+
+    // Your other configuration would be here.
     
+    @Autowired
+    private StatsDClient; client;
+
+    @Bean
+    public TimingAspect timingAspect() {
+        return new TimingAspect(new MetricSinkStatsdClient(client));
+    }
+}
+```
+
 Then, all you have to do is annotate any method you want to record the timing of.
 
 **NOTE** - Only `public` methods can be annotated and timed.
