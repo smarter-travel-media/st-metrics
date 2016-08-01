@@ -9,6 +9,8 @@ or not.
 * **Breaking change** - Change `TimingAspect` and `DefaultKeyGenerator` to move the responsibility of
   adding the `timer.` prefix to metrics from the aspect, to the key generator. Per
   [#6](https://github.com/smarter-travel-media/st-metrics/issues/6).
+* Add new `MetricSinkStatsdClient` backend that write timings directly to Statsd. Per
+  [#5](https://github.com/smarter-travel-media/st-metrics/issues/5).
 
 ### [v0.3.0](https://github.com//smarter-travel-media/st-metrics/tree/st-metrics-0.3.0) - 2016-03-25
 * Bump parent package to Spring Platform 2.0.1 (from 1.1.2) which in turns bumps the version of
