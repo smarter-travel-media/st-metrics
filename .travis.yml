@@ -6,6 +6,3 @@ jdk:
 branches:
   only:
     - master
-
-after_success:
-  - ./push-docs.sh
