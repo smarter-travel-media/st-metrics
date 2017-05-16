@@ -4,6 +4,8 @@ The ST-Metrics library makes use of [Semantic versioning](http://semver.org/). C
 each release of the library are listed below along with an indication if they are breaking changes
 or not.
 
+### [v0.4.1](https://github.com//smarter-travel-media/st-metrics/tree/st-metrics-0.4.1) - 2017-05-16
+* Abstract system time for easier unit testing.
 
 ### [v0.4.0](https://github.com//smarter-travel-media/st-metrics/tree/st-metrics-0.4.0) - 2016-08-01
 * **Breaking change** - Change `TimingAspect` and `DefaultKeyGenerator` to move the responsibility of
