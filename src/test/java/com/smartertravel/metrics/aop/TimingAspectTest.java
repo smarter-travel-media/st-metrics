@@ -5,6 +5,7 @@ import com.codahale.metrics.Timer;
 import com.smartertravel.metrics.aop.TimingAspect.DefaultKeyGenerator;
 import com.smartertravel.metrics.aop.backend.MetricSinkDropWizard;
 import com.smartertravel.metrics.aop.backend.MetricSinkSpringBoot;
+import com.smartertravel.metrics.aop.util.Time;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.junit.Test;
@@ -17,8 +18,9 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyLong;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,9 +59,6 @@ public class TimingAspectTest {
     private Signature signature;
 
     @Mock
-    private UserDao userDao;
-
-    @Mock
     private MetricRegistry metricRegistry;
 
     @Mock
@@ -67,6 +66,9 @@ public class TimingAspectTest {
 
     @Mock
     private Timer timer;
+
+    @Mock
+    private Time time;
 
     @Test
     public void testDefaultKeyGeneratorGetKeyAnnotationValue() throws NoSuchMethodException {
@@ -101,13 +103,14 @@ public class TimingAspectTest {
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getName()).thenReturn("userExists");
         when(metricRegistry.timer(eq("timer.UserDaoHystrix.userExists"))).thenReturn(timer);
+        when(time.nanoseconds()).thenReturn(1_000_000L).thenReturn(2_500_000L);
 
-        final TimingAspect aspect = new TimingAspect(new MetricSinkDropWizard(metricRegistry));
+        final TimingAspect aspect = new TimingAspect(new MetricSinkDropWizard(metricRegistry), new DefaultKeyGenerator(), time);
         final Object result = aspect.performanceLog(joinPoint, dao, annotations[0]);
 
         assertNotNull("Expected non-null result type", result);
         assertTrue("Expected boolean return type from aspect, was " + result.getClass().getName(), result instanceof Boolean);
-        verify(timer).update(anyLong(), eq(TimeUnit.NANOSECONDS));
+        verify(timer).update(eq(1_500_000L), eq(TimeUnit.NANOSECONDS));
     }
 
     @Test
@@ -120,8 +123,9 @@ public class TimingAspectTest {
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getName()).thenReturn("userExists");
         when(metricRegistry.timer(eq("timer.UserDaoHystrix.userExists"))).thenReturn(timer);
+        when(time.nanoseconds()).thenReturn(1_000_000L).thenReturn(2_500_000L);
 
-        final TimingAspect aspect = new TimingAspect(new MetricSinkDropWizard(metricRegistry));
+        final TimingAspect aspect = new TimingAspect(new MetricSinkDropWizard(metricRegistry), new DefaultKeyGenerator(), time);
         IOException err = null;
 
         try {
@@ -131,7 +135,7 @@ public class TimingAspectTest {
         }
 
         assertNotNull("Expected exception to be raised while calling join point", err);
-        verify(timer).update(anyLong(), eq(TimeUnit.NANOSECONDS));
+        verify(timer).update(eq(1_500_000L), eq(TimeUnit.NANOSECONDS));
     }
 
     @Test
@@ -143,13 +147,14 @@ public class TimingAspectTest {
         when(joinPoint.proceed()).thenReturn(true);
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getName()).thenReturn("userExists");
+        when(time.nanoseconds()).thenReturn(1_000_000L).thenReturn(4_000_000L);
 
-        final TimingAspect aspect = new TimingAspect(new MetricSinkSpringBoot(gaugeService));
+        final TimingAspect aspect = new TimingAspect(new MetricSinkSpringBoot(gaugeService), new DefaultKeyGenerator(), time);
         final Object result = aspect.performanceLog(joinPoint, dao, annotations[0]);
 
         assertNotNull("Expected non-null result type", result);
         assertTrue("Expected boolean return type from aspect, was " + result.getClass().getName(), result instanceof Boolean);
-        verify(gaugeService).submit(eq("timer.UserDaoHystrix.userExists"), anyLong());
+        verify(gaugeService).submit(eq("timer.UserDaoHystrix.userExists"), eq(3D));
     }
 
     @Test
@@ -161,8 +166,9 @@ public class TimingAspectTest {
         when(joinPoint.proceed()).thenThrow(IOException.class);
         when(joinPoint.getSignature()).thenReturn(signature);
         when(signature.getName()).thenReturn("userExists");
+        when(time.nanoseconds()).thenReturn(1_000_000L).thenReturn(4_000_000L);
 
-        final TimingAspect aspect = new TimingAspect(new MetricSinkSpringBoot(gaugeService));
+        final TimingAspect aspect = new TimingAspect(new MetricSinkSpringBoot(gaugeService), new DefaultKeyGenerator(), time);
         IOException err = null;
 
         try {
@@ -172,6 +178,6 @@ public class TimingAspectTest {
         }
 
         assertNotNull("Expected exception to be raised while calling join point", err);
-        verify(gaugeService).submit(eq("timer.UserDaoHystrix.userExists"), anyLong());
+        verify(gaugeService).submit(eq("timer.UserDaoHystrix.userExists"), eq(3D));
     }
 }
