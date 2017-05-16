@@ -1,6 +1,8 @@
 package com.smartertravel.metrics.aop;
 
 import com.smartertravel.metrics.aop.backend.MetricSink;
+import com.smartertravel.metrics.aop.util.SystemTime;
+import com.smartertravel.metrics.aop.util.Time;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -26,6 +28,7 @@ public class TimingAspect {
 
     private final MetricSink metricSink;
     private final KeyGenerator keyGenerator;
+    private final Time time;
 
     /**
      * Construct a new timing aspect that will record method execution time using the given
@@ -62,19 +65,38 @@ public class TimingAspect {
      * @throws NullPointerException If {@code metricSink} or {@code keyGenerator} is null
      */
     public TimingAspect(MetricSink metricSink, KeyGenerator keyGenerator) {
+        this(metricSink, keyGenerator, new SystemTime());
+    }
+
+    /**
+     * Construct a new timing aspect that will record method execution time using the given
+     * {@link MetricSink}, {@link KeyGenerator}, and {@link Time} implementations.
+     * <p>
+     * This constructor is generally only used or required by unit tests.
+     *
+     * @param metricSink   Metric backend to submit timings to
+     * @param keyGenerator {@code KeyGenerator} implementation that will create keys for metrics
+     *                     recorded with a {@code Timer} instance based on the join point, object
+     *                     being instrumented, and {@code Timed} annotation.
+     * @param time         {@code Time} implementation used for determining execution time
+     * @throws NullPointerException If {@code metricSink} or {@code keyGenerator} is null
+     */
+    public TimingAspect(MetricSink metricSink, KeyGenerator keyGenerator, Time time) {
         this.metricSink = Objects.requireNonNull(metricSink);
         this.keyGenerator = Objects.requireNonNull(keyGenerator);
+        this.time = Objects.requireNonNull(time);
+
     }
 
     @Around(value = "target(bean) && TimingPointcut.performanceLog(timed)", argNames = "joinPoint,bean,timed")
     public Object performanceLog(ProceedingJoinPoint joinPoint, Object bean, Timed timed) throws Throwable {
         final String key = keyGenerator.getKey(joinPoint, bean, timed);
-        final long start = System.nanoTime();
+        final long start = time.nanoseconds();
 
         try {
             return joinPoint.proceed();
         } finally {
-            final long end = System.nanoTime();
+            final long end = time.nanoseconds();
             metricSink.time(key, end - start, TimeUnit.NANOSECONDS);
         }
     }
