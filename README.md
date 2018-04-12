@@ -6,6 +6,10 @@
 ST-Metrics is a collection of aspects and annotations for recording method timing information in your
 Spring Boot application.
 
+## Deprecated
+
+Note that this library is **deprecated**. Any users are encouraged to migrate to the [Micrometer](http://micrometer.io/) library.
+
 ## Downloads
 
 Release binaries can be found on [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.smartertravel.metrics.aop%22%20AND%20a%3A%22st-metrics%22)
@@ -75,10 +79,10 @@ import com.smartertravel.metrics.aop.backend.MetricSinkDropWizard;
 public class MyApplicationConfig {
 
     // Your other configuration would be here.
-    
+
     @Autowired
     private MetricRegistry metricRegistry;
-    
+
     @Bean
     public TimingAspect timingAspect() {
         return new TimingAspect(new MetricSinkDropWizard(metricRegistry));
@@ -103,10 +107,10 @@ import com.smartertravel.metrics.aop.backend.MetricSinkSpringBoot;
 public class MyApplicationConfig {
 
     // Your other configuration would be here.
-    
+
     @Autowired
     private GaugeService gaugeService;
-    
+
     @Bean
     public TimingAspect timingAspect() {
         return new TimingAspect(new MetricSinkSpringBoot(gaugeService));
@@ -131,7 +135,7 @@ import com.smartertravel.metrics.aop.backend.MetricSinkStatsdClient;
 public class MyApplicationConfig {
 
     // Your other configuration would be here.
-    
+
     @Autowired
     private StatsDClient; client;
 
@@ -145,7 +149,7 @@ public class MyApplicationConfig {
 Then, all you have to do is annotate any method you want to record the timing of.
 
 **NOTE** - Only `public` methods can be annotated and timed.
-    
+
 ``` java
 package com.example.myapp;
 
@@ -160,7 +164,7 @@ public class UserDaoMysql implements UserDao {
     public Optional<User> getUserById(UserId id) {
         return Optional.empty();
     }
-}    
+}
 ```
 
 Now, on every call of `UserDaoMysql.getUserById()` you should see timing results available as part
